@@ -6,7 +6,8 @@ const templateStyle = `
     <style>
         .game{
             width: 500px;
-            margin: 0 auto;
+            margin: auto;
+            padding: 10px;
             border: 1px solid black;
             background: rgba(80,90,50,0.7);
             color: white;
@@ -35,7 +36,9 @@ const templateStyle = `
           background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
           background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
           text-decoration: none;
-}
+        }
+        p, h1{
+            margin: 10px;
         }
     </style>`;
 
@@ -68,18 +71,19 @@ class Constructor extends HTMLElement{
     constructor(){
         super();
         this.root = this.attachShadow({mode : "open"});
-        this.lives = 100;
+        this.lives = null;
+        this.totalLives = 100;
 
         EventBus.subscribe("onWin", ()=>{
             this.root.innerHTML = templateStyle + templateWin;
         })
 
         EventBus.subscribe("onLoss", ()=>{
-            this.lives -= 25;
-            if(this.lives === 0){
+            this.totalLives -= 100 / this.lives;
+            if(this.totalLives <= 0){
                 this.root.innerHTML = templateStyle + templateLoss;
             }else{
-                this.root.querySelector("game-progress").value = this.lives;
+                this.root.querySelector("game-progress").value = this.totalLives;
             }
         })
     }
@@ -95,18 +99,22 @@ class Constructor extends HTMLElement{
         if(e.target.value === "easy"){
             numberImages = 4;
             repeatImages = 2;
+            this.lives = 4;
         }else if(e.target.value === "medium"){
-            numberImages = 5;
-            repeatImages = 3;
+            numberImages = 6;
+            repeatImages = 2;
+            this.lives = 6;
         }else{
             numberImages = 7;
             repeatImages = 3;
+            this.lives = 10;
         }
         const template = `
           <div class="game">
             <game-grid numberImages = "${numberImages}" repeatImages = "${repeatImages}"></game-grid>
-            <div>Images repeated ${repeatImages} times</div>
-            <game-progress class="progress" max="${this.lives}"></game-progress>
+            <p>Images repeated ${repeatImages} times</p>
+            <p>Number of attempts allowed : ${this.lives}</p>
+            <game-progress class="progress"></game-progress>
             <div id="result"></div>
           </div>
         `

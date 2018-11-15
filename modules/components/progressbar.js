@@ -4,13 +4,16 @@ const template = `
     <style>
         .bar-container{
             width: 100%;
-            height: 30px;
-            background: black;
+            height: 10px;
+            background: transparent;
+            border-radius: 28px;
+            border: solid 1px black;
         }
         .bar{
             background: #7DBEBD;
             display: block;
-            height: 30px;
+            height: 10px;
+            border-radius: 28px;
         }
     </style>
 `;
@@ -40,9 +43,8 @@ class Progress extends HTMLElement{
     constructor(){
         super();
         this.root = this.attachShadow({mode : "open"});
-        this.max = this.max || 100;
-        this.value = this.value || 100;
-        console.log("construct");
+        this.max = 100;
+        this.value = 100;
     }
 
     connectedCallback(){
@@ -51,7 +53,6 @@ class Progress extends HTMLElement{
                        <div class="bar" max="${this.max}" value="${this.max}"></div>
            </div>
         `;
-        console.log(dynamicTemplate);
         this.root.innerHTML = template + dynamicTemplate;
         this.root.querySelector(".bar").style.width = this.max + "%";
     }
