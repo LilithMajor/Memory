@@ -73,7 +73,7 @@ class GameImage extends HTMLElement{
         if(attrName==="turned" && newValue == "false"){
             setTimeout(() => {
                 this.root.querySelector("root").style.backgroundImage = "url(images/back.svg)";
-            }, 1000);
+            }, 500);
         }
     }
 }
