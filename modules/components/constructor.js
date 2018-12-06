@@ -107,7 +107,7 @@ class Constructor extends HTMLElement{
         }else{
             numberImages = 7;
             repeatImages = 3;
-            this.lives = 10;
+            this.lives = 18;
         }
         const template = `
           <div class="game">
