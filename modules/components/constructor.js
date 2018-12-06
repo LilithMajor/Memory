@@ -25,8 +25,9 @@ const templateStyle = `
               font-family: Arial;
               color: #ffffff;
               font-size: 20px;
-              padding: 10px 20px 10px 20px;
+              padding: 15px 40px 15px 40px;
               text-decoration: none;
+              border:none;
         }
         .game button:hover{
           background: #3cb0fd;
@@ -36,6 +37,7 @@ const templateStyle = `
           background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
           background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
           text-decoration: none;
+          border:none;
         }
         p, h1{
             margin: 10px;
